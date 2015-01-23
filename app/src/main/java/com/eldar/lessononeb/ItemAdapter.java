@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import java.util.Vector;
 
 /**
  * Created by EldarM on 10/23/2014.
@@ -16,16 +17,23 @@ public class ItemAdapter extends BaseAdapter {
     private static final String LOG_TAG = ItemAdapter.class.getCanonicalName();
     private final Context context;
     private final LayoutInflater layoutInflater;
-    public ItemAdapter(Context c) {
+    private Vector<SpecialDate> dates;
 
+    public ItemAdapter(Context c) {
         context = c;
 
         layoutInflater = LayoutInflater.from(context);
 
+        dates = new Vector<SpecialDate>();
+        dates.add(new SpecialDate("G", "2010/09/27 09:00:00"));
+        dates.add(new SpecialDate("Z", "2012/10/01 10:00:00"));
+        dates.add(new SpecialDate("M", "2000/04/28 08:00:00"));
+
     }
+
     @Override
     public int getCount() {
-        return 50;
+        return dates.size();
     }
 
     @Override
@@ -50,8 +58,10 @@ public class ItemAdapter extends BaseAdapter {
         } else {
             itemView = (LinearLayout) view;
         }
-        TextView textView = (TextView)itemView.findViewById(R.id.textView);
-        textView.setText(String.format(parent.getResources().getString(R.string.sample_text), i));
+        TextView textView = (TextView)itemView.findViewById(R.id.textLabel);
+        textView.setText(String.format(dates.elementAt(i).getLabel() + " : " + dates.elementAt(i).toString()));
+        textView = (TextView)itemView.findViewById(R.id.textValue);
+        textView.setText(dates.elementAt(i).timeSince());
         return itemView;
     }
 }
