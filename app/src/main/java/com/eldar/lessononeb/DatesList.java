@@ -10,10 +10,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
+import android.os.Handler;
+
 /**
  * Created by EldarM on 10/21/2014.
  */
 public class DatesList extends ActionBarActivity {
+    private Timer timer;
+    private final Handler timeHandler = new Handler();
+
     //Fragment that displays the meme.
     public static class DatesListFragment extends Fragment {
 
@@ -29,6 +37,8 @@ public class DatesList extends ActionBarActivity {
     }
 
     private ItemAdapter itemAdapter;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -56,5 +66,29 @@ public class DatesList extends ActionBarActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                timeHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        itemAdapter.notifyDataSetChanged();
+                    }
+                });
+            }
+        },500, 1000 );
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+        timer.cancel();
     }
 }

@@ -12,13 +12,13 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/sample_text"
         android:id="@+id/textLabel"
-        android:textSize="36dp" />
+        android:textSize="20sp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/textValue"
-        android:textSize="28dp" />
+        android:textSize="14sp" />
 
 </LinearLayout>

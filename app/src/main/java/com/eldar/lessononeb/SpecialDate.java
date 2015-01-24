@@ -78,7 +78,7 @@ class SpecialDate{
             shift = -shift;
         }
         String yearsString = years == 0 ? "" : String.format("%d years", years);
-        return yearsString + " " + formatShift(shift);
+        return yearsString + ", " + formatShift(shift);
     }
 
     /** Convert into a string representing time left to the nearest anniversary. */
@@ -102,6 +102,7 @@ class SpecialDate{
     }
 
     private long anniversaryShiftSec(){
+        now = new GregorianCalendar();
         return (anniversary.getTime().getTime() - now.getTime().getTime())/1000;
     }
 }
