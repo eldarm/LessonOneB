@@ -56,7 +56,7 @@ public class ItemAdapter extends BaseAdapter {
     @Override
 
     public View getView(int i, View view, ViewGroup parent) {
-        Log.d(LOG_TAG, String.format("getView() for item %d", i));
+        // Log.d(LOG_TAG, String.format("getView() for item %d", i));
         LinearLayout itemView;
         if (view == null) { // Create a new view if no recycled view is available
                     itemView = (LinearLayout) layoutInflater.inflate(
@@ -89,6 +89,7 @@ public class ItemAdapter extends BaseAdapter {
             is.close();
         } catch (Exception e){
             e.printStackTrace();
+            dates = new Vector<SpecialDate>();
         }
     }
 }

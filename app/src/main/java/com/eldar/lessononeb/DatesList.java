@@ -71,7 +71,7 @@ public class DatesList extends ActionBarActivity {
         }
         if (id == R.id.action_add_date) {
             Toast.makeText(this, "Adding a date...", Toast.LENGTH_LONG).show();
-            final String hardcodedValue = "G:2010/09/27 09:00:00\nZ:2012/10/01 10:00:00\n";
+            final String hardcodedValue = "G:2010/09/27 09:00:00\nZ:2012/10/01 10:00:00\nM:2000/04/28 10:00:00\n";
             InputStream stream =
                     new ByteArrayInputStream(
                             hardcodedValue.getBytes(StandardCharsets.UTF_8));
