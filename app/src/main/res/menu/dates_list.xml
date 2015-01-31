@@ -6,4 +6,8 @@
         android:title="@string/action_settings"
         android:orderInCategory="100"
         app:showAsAction="never" />
+    <item android:id="@+id/action_add_date"
+        android:title="@string/add_date"
+        android:orderInCategory="100"
+        app:showAsAction="always" />
 </menu>

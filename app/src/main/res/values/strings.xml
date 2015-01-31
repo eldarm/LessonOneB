@@ -8,5 +8,6 @@
     <string name="enter_date_time">Use this Date and Time</string>
     <string name="ItemSampleText">Item Sample Text</string>
     <string name="sample_text">Sample Text for %d</string>
+    <string name="add_date">Add a date</string>
 
 </resources>

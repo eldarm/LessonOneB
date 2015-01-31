@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.Vector;
 
 /**
@@ -15,6 +18,8 @@ import java.util.Vector;
  */
 public class ItemAdapter extends BaseAdapter {
     private static final String LOG_TAG = ItemAdapter.class.getCanonicalName();
+    private static final String dataFileName = "data_my_dates.txt";
+
     private final Context context;
     private final LayoutInflater layoutInflater;
     private Vector<SpecialDate> dates;
@@ -23,12 +28,14 @@ public class ItemAdapter extends BaseAdapter {
         context = c;
 
         layoutInflater = LayoutInflater.from(context);
+        loadDates();
+    }
 
-        dates = new Vector<SpecialDate>();
-        dates.add(new SpecialDate("G", "2010/09/27 09:00:00"));
-        dates.add(new SpecialDate("Z", "2012/10/01 10:00:00"));
-        dates.add(new SpecialDate("M", "2000/04/28 08:00:00"));
-
+    public void setDates(Vector<SpecialDate> dates){
+        if (dates != null){
+            this.dates = dates;
+            notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -63,5 +70,25 @@ public class ItemAdapter extends BaseAdapter {
         textView = (TextView)itemView.findViewById(R.id.textValue);
         textView.setText(dates.elementAt(i).timeSince());
         return itemView;
+    }
+    public void saveDates(){
+        try{
+            FileOutputStream outputStream =
+                    context.openFileOutput(dataFileName, Context.MODE_PRIVATE);
+            SpecialDate.writeDatesList(outputStream, dates);
+            outputStream.close();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadDates(){
+        try{
+            FileInputStream is = context.openFileInput(dataFileName);
+            setDates(SpecialDate.readDatesList(is));
+            is.close();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
